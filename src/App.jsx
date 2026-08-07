@@ -1,5 +1,6 @@
 import Producto from './components/Producto'
 import TarjetaPerfil from './components/TarjetaPerfil'
+import './App.css'
 
 function App(){
 

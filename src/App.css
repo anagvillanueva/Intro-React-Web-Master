@@ -3,3 +3,23 @@ body{
   font-family: 'Courier New', Courier, monospace;
   background-color: bisque;
 }
+
+/* Estilo de cada "tarjeta" de perfil (el <article> en TarjetaPerfil.jsx) */
+.tarjeta {
+  width: 300px;
+  margin: 20px auto; /* centra la tarjeta horizontalmente y da espacio vertical */
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px; /* bordes redondeados */
+}
+
+/* Estilo aplicado a TODOS los botones de la app */
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #646cff;
+  color: white;
+  cursor: pointer; /* muestra la manito al pasar el mouse, indicando que es clickeable */
+}
