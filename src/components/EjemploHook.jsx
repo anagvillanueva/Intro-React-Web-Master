@@ -4,6 +4,7 @@ export function EjemploHook(){
     // Declaracion del estado 
 
     const [mensaje, setMensaje] = useState("Hola desde la memoria")
+    // const [estado, setEstado] = useState(valorInicial);
 
     return(
         <div>
@@ -14,3 +15,9 @@ export function EjemploHook(){
         </div>
     )
 }
+
+// Dentro de useState colocamos el valor inicial, puede ser: 
+// useState(0)
+// useState("")
+// useState ("Hola")
+// useState(false)
