@@ -1,25 +1,256 @@
-body{
-  margin: 0; 
-  font-family: 'Courier New', Courier, monospace;
-  background-color: bisque;
+/* ============================================================
+   Tema "Explorador Espacial": fondo estrellado + panel futurista
+   ============================================================ */
+
+/* Fondo de toda la página: varios radial-gradient pequeños simulan "estrellas"
+   sobre un degradado vertical oscuro (linear-gradient) */
+body {
+  background:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 120px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 160px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 230px 180px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 300px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 40px 200px, #fff, transparent),
+    linear-gradient(180deg, #05060f 0%, #0b0d21 45%, #120a2e 100%);
+  background-attachment: fixed;
+  background-size: 350px 350px, 350px 350px, 350px 350px, 350px 350px, 350px 350px, 350px 350px, 100% 100%;
 }
 
-/* Estilo de cada "tarjeta" de perfil (el <article> en TarjetaPerfil.jsx) */
-.tarjeta {
-  width: 300px;
-  margin: 20px auto; /* centra la tarjeta horizontalmente y da espacio vertical */
-  padding: 20px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px; /* bordes redondeados */
+/* Contenedor principal (envuelve todo el JSX que devuelve App.jsx) */
+.app-container {
+  padding: 32px 28px 48px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+  color: #dfe3f5;
 }
 
-/* Estilo aplicado a TODOS los botones de la app */
-button {
-  padding: 10px 16px;
+/* Título "🚀 Explorador Espacial": texto con degradado usando background-clip: text */
+.app-container h1 {
+  text-align: center;
+  font-size: 34px;
+  margin: 8px 0 28px;
+  background: linear-gradient(90deg, #7dd3fc, #c084fc, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(192, 132, 252, 0.35);
+}
+
+.app-container h2 {
+  color: #f3f4f6;
+  font-size: 19px;
+  margin: 0 0 12px;
+}
+
+.app-container h3 {
+  color: #b9c0e0;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 24px 0 12px;
+}
+
+/* ===== Panel de Control =====
+   Estilos de la <section className="panel-control"> que muestra distancia,
+   combustible y el botón de aterrizar (estado manejado con useState/useEffect) */
+.panel-control {
+  background: linear-gradient(155deg, #171a35 0%, #1c1440 100%);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  color: #fff;
+  padding: 20px 22px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.panel-control p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #c7cbe8;
+}
+
+.panel-control p strong {
+  color: #c084fc;
+}
+
+/* Barra visual de combustible */
+.combustible-barra {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 8px 0 16px;
+}
+
+.combustible-progreso {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #34d399, #7dd3fc);
+  transition: width 0.4s ease;
+}
+
+/* Cuando el combustible baja de 20%, la clase "bajo" cambia el color a rojo/naranja
+   (se agrega/quita dinámicamente en el className del JSX según el valor de "combustible") */
+.combustible-progreso.bajo {
+  background: linear-gradient(90deg, #f87171, #fb923c);
+}
+
+.btn-aterrizar {
+  padding: 10px 20px;
+  cursor: pointer;
   border: none;
-  border-radius: 6px;
-  background-color: #646cff;
-  color: white;
-  cursor: pointer; /* muestra la manito al pasar el mouse, indicando que es clickeable */
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0b0d21;
+  background: linear-gradient(90deg, #7dd3fc, #c084fc);
+  box-shadow: 0 6px 18px -6px rgba(125, 211, 252, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-aterrizar:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -6px rgba(192, 132, 252, 0.7);
+}
+
+/* Estado visual cuando el botón se deshabilita (combustible === 0 en el JSX) */
+.btn-aterrizar:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  background: #4b5563;
+  box-shadow: none;
+}
+
+/* ===== Sección de planetas visitados =====
+   Lista los componentes <Planeta /> que se MONTAN al presionar "Aterrizar"
+   (demo de ciclo de vida: montaje/desmontaje) */
+.seccion-planetas {
+  margin-top: 24px;
+}
+
+/* Grilla responsiva: cada tarjeta .planeta-card (ver Planeta.css) ocupa mínimo 140px */
+.grid-planetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.separador {
+  border: none;
+  height: 1px;
+  margin: 32px 0;
+  background: linear-gradient(90deg, transparent, rgba(192, 132, 252, 0.4), transparent);
+}
+
+/* ===== Bitácora de Exploración =====
+   Formulario controlado (nombreForm, descripcionForm, imagenForm) cuyos valores
+   se guardan en localStorage a través del useEffect que observa "bitacora" */
+.formulario-bitacora {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.formulario-bitacora input[type='text'],
+.formulario-bitacora textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #e5e7f5;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.formulario-bitacora input[type='text']::placeholder,
+.formulario-bitacora textarea::placeholder {
+  color: #7d84a8;
+}
+
+.formulario-bitacora input[type='text']:focus,
+.formulario-bitacora textarea:focus {
+  outline: none;
+  border-color: #c084fc;
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2);
+}
+
+.formulario-bitacora input[type='file'] {
+  color: #b9c0e0;
+  font-size: 13px;
+}
+
+.btn-guardar {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #0b0d21;
+  background: linear-gradient(90deg, #34d399, #7dd3fc);
+  transition: transform 0.15s ease;
+}
+
+.btn-guardar:hover {
+  transform: translateY(-1px);
+}
+
+/* Lista de entradas guardadas (una <li className="item-bitacora"> por cada objeto en "bitacora") */
+.lista-bitacora {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.item-bitacora {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.6);
+}
+
+.item-bitacora h4 {
+  margin: 0 0 6px;
+  color: #f3f4f6;
+}
+
+.item-bitacora p {
+  margin: 0 0 10px;
+  color: #b9c0e0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Vista previa de la imagen subida (item.imagen, generada con URL.createObjectURL) */
+.imagen-bitacora {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Botón que dispara handleDeleteBitacora(index) para quitar una entrada de la bitácora */
+.btn-eliminar {
+  margin-top: 12px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s ease;
+}
+
+.btn-eliminar:hover {
+  background: rgba(239, 68, 68, 0.3);
 }
