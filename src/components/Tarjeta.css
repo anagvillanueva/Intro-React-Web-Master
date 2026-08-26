@@ -1,0 +1,74 @@
+.tarjeta {
+  background: linear-gradient(155deg, #fdf4ff, #f3e8ff);
+  border: 1px solid #e9d5ff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 14px rgba(180, 160, 220, 0.25);
+  max-width: 360px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(180, 160, 220, 0.35);
+}
+
+.tarjeta-titulo {
+  margin: 0 0 12px 0;
+  color: #6b21a8;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  border-bottom: 2px solid #f0abfc;
+  padding-bottom: 8px;
+}
+
+.tarjeta-contenido {
+  color: #4b5563;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.boton-alternar {
+  margin-top: 14px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f0abfc, #c4b5fd);
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(196, 181, 253, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.boton-alternar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(196, 181, 253, 0.55);
+}
+
+.boton-alternar:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(196, 181, 253, 0.4);
+}
+
+.panel-autenticacion {
+  padding: 32px 28px;
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 420px;
+  margin: 40px auto;
+  background: linear-gradient(155deg, #fef9ff, #f5f3ff);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(196, 181, 253, 0.3);
+}
+
+.panel-autenticacion h1 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 24px;
+  color: #7e22ce;
+}

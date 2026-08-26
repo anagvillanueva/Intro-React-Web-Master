@@ -1,17 +1,29 @@
-import { UsuarioSaludo } from './components/UsuarioSaludo'
+import { useState} from 'react';
+import { UsuarioSaludo } from './components/UsuarioSaludo';
+import {Tarjeta} from './components/Tarjeta';
+import {EstadoSesion} from './components/EstadoSesion';
 
 function App() {
-  const estaLogeado = true;
-  const usuario = "Ana";
+  const [estado, setEstado] = useState('autenticado');
 
-  return ( 
-    <div style={{ padding: '20px', fontFamily: 'sans-serif'}}>
-      <h1>Proyecto de Autenticación</h1>
-      <UsuarioSaludo
-      estaLogeado={estaLogeado}
-      username={usuario}
-      mensajeNoLeido={0}
-      />
+  return (
+    <div className="panel-autenticacion">
+      <h1>Panel de Autenticación</h1>
+
+      <Tarjeta titulo="Perfil del Usuario">
+        <EstadoSesion estado={estado} />
+        <UsuarioSaludo 
+          estaLogeado={estado === 'autenticado'} 
+          username="Ana" 
+          mensajeNoLeido={5} 
+        />
+        
+        <button
+          className="boton-alternar"
+          onClick={() => setEstado(estado === 'autenticado' ? 'invitado' : 'autenticado')}>
+          Alternar Estado
+        </button>
+      </Tarjeta>
     </div>
   );
 }
