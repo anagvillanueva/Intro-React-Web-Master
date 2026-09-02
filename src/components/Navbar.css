@@ -1,0 +1,56 @@
+/* ===== Barra de Navegación =====
+   Nav fija con enlaces a Inicio, Mi Perfil y Login/Salir (tema "Explorador Espacial") */
+.navbar-espacial {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 22px;
+  background: linear-gradient(155deg, #171a35 0%, #1c1440 100%);
+  border-bottom: 1px solid rgba(192, 132, 252, 0.25);
+  box-shadow: 0 6px 20px -10px rgba(124, 58, 237, 0.5);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.nav-link-espacial {
+  color: #b9c0e0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.nav-link-espacial:hover {
+  color: #f3f4f6;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-link-espacial.active {
+  color: #0b0d21;
+  background: linear-gradient(90deg, #7dd3fc, #c084fc);
+  box-shadow: 0 4px 14px -4px rgba(192, 132, 252, 0.7);
+}
+
+.navbar-espacial > div {
+  margin-left: auto;
+}
+
+.navbar-espacial button {
+  padding: 8px 16px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #dfe3f5;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.15s ease;
+}
+
+.navbar-espacial button:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
