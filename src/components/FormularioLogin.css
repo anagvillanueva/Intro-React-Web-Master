@@ -1,0 +1,111 @@
+/* ===== Formulario de Login =====
+   Panel de acceso "Iniciar Sesión en la Nave" (useRef + useState para validación) */
+.formulario-login {
+  background: linear-gradient(155deg, #171a35 0%, #1c1440 100%);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  padding: 28px 26px;
+  border-radius: 16px;
+  max-width: 380px;
+  margin: 40px auto;
+  box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  color: #dfe3f5;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.formulario-login h2 {
+  text-align: center;
+  margin: 0 0 20px;
+  color: #f3f4f6;
+  font-size: 20px;
+}
+
+.formulario-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.campo-login {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-login label {
+  font-size: 13px;
+  color: #b9c0e0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.campo-login input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #e5e7f5;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.campo-login input::placeholder {
+  color: #7d84a8;
+}
+
+.campo-login input:focus {
+  outline: none;
+  border-color: #c084fc;
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2);
+}
+
+.acciones-login {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn-ingresar {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0b0d21;
+  background: linear-gradient(90deg, #7dd3fc, #c084fc);
+  box-shadow: 0 6px 18px -6px rgba(125, 211, 252, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-ingresar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -6px rgba(192, 132, 252, 0.7);
+}
+
+.btn-limpiar {
+  padding: 10px 16px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #dfe3f5;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.15s ease;
+}
+
+.btn-limpiar:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Mensaje de validación (usuario/contraseña vacíos) */
+.mensaje-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin: 0 0 16px;
+}
